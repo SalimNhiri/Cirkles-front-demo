@@ -15,5 +15,5 @@ export default defineConfig({
       'tailwindcss/version.js': 'tailwindcss/package.json'
     }
   },
-  base: process.env.NODE_ENV === 'production' ? '/CIRKLES-demo-front/' : '/'
+  base: '/'
 }) 
