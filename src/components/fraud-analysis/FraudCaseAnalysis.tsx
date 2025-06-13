@@ -58,7 +58,7 @@ export interface FraudTypology {
 }
 
 export function FraudCaseAnalysis() {
-  const [activeTab, setActiveTab] = useState('priority');
+  const [activeTab, setActiveTab] = useState('score');
   const [searchTerm, setSearchTerm] = useState('');
   const [riskFilter, setRiskFilter] = useState<string>('all');
   const [statusFilter, setStatusFilter] = useState<string>('all');
@@ -109,10 +109,7 @@ export function FraudCaseAnalysis() {
 
       {/* Onglets de navigation */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-4 gap-4 p-1.5 bg-gray-100 rounded-xl">
-          <TabsTrigger value="priority" className="data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all">
-            Priorisation
-          </TabsTrigger>
+        <TabsList className="grid w-full grid-cols-3 gap-4 p-1.5 bg-gray-100 rounded-xl">
           <TabsTrigger value="score" className="data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all">
             Score IA
           </TabsTrigger>
@@ -125,14 +122,6 @@ export function FraudCaseAnalysis() {
         </TabsList>
 
         <div className="mt-6">
-          <TabsContent value="priority">
-            <FraudCasesPriority 
-              searchTerm={searchTerm}
-              riskFilter={riskFilter}
-              statusFilter={statusFilter}
-            />
-          </TabsContent>
-
           <TabsContent value="score">
             <FraudScoreInterpretability />
           </TabsContent>

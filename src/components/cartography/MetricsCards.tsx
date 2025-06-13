@@ -46,28 +46,28 @@ const metrics = [
 
 export function MetricsCards() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {metrics.map((metric, index) => (
         <div
           key={index}
-          className="relative overflow-hidden rounded-xl bg-white p-6 shadow-sm transition-all hover:shadow-md"
+          className="relative overflow-hidden rounded-xl bg-white p-4 shadow-sm transition-all hover:shadow-md"
         >
           <div className="flex items-center justify-between">
-            <div className={`rounded-lg p-2 ${metric.bgColor}`}>
-              <metric.icon className={`h-6 w-6 ${metric.color}`} />
+            <div className={`rounded-lg p-1.5 ${metric.bgColor}`}>
+              <metric.icon className={`h-5 w-5 ${metric.color}`} />
             </div>
             <div className={`text-sm font-medium ${metric.trendColor}`}>
               {metric.trend}
             </div>
           </div>
           
-          <div className="mt-4">
+          <div className="mt-2">
             <h3 className="text-sm font-medium text-gray-500">{metric.title}</h3>
-            <p className="mt-2 text-3xl font-semibold text-gray-900">{metric.value}</p>
-            <p className="mt-1 text-sm text-gray-500">{metric.description}</p>
+            <p className="mt-1 text-2xl font-semibold text-gray-900">{metric.value}</p>
+            <p className="text-xs text-gray-500">{metric.description}</p>
           </div>
 
-          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gray-200 to-transparent opacity-50" />
+          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-gray-200 to-transparent opacity-50" />
         </div>
       ))}
     </div>
