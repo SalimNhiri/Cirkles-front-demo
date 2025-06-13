@@ -15,5 +15,15 @@ export default defineConfig({
       'tailwindcss/version.js': 'tailwindcss/package.json'
     }
   },
-  base: '/'
+  base: '/',
+  build: {
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom']
+        }
+      }
+    }
+  }
 }) 
