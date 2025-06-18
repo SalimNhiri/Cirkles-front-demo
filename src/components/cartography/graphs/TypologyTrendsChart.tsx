@@ -39,16 +39,19 @@ export function TypologyTrendsChart() {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={typologyData}
-            margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+            margin={{ top: 20, right: 30, left: 40, bottom: 5 }}
+            layout="vertical"
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-            <XAxis 
+            <YAxis 
+              type="category"
               dataKey="type" 
               tick={{ fontSize: 12 }}
               tickLine={false}
               axisLine={false}
             />
-            <YAxis 
+            <XAxis 
+              type="number"
               tick={{ fontSize: 12 }}
               tickLine={false}
               axisLine={false}
@@ -68,13 +71,13 @@ export function TypologyTrendsChart() {
               dataKey="clientTrend" 
               name="Client" 
               fill="#93C5FD"
-              radius={[4, 4, 0, 0]}
+              radius={[0, 4, 4, 0]}
             />
             <Bar 
               dataKey="marketTrend" 
               name="Marché" 
               fill="#FCA5A5"
-              radius={[4, 4, 0, 0]}
+              radius={[0, 4, 4, 0]}
             />
           </BarChart>
         </ResponsiveContainer>
