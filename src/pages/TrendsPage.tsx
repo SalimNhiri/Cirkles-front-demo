@@ -7,8 +7,8 @@ export function TrendsPage() {
       <div className="container mx-auto px-10 py-10 space-y-10">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Tendances</h1>
-            <p className="mt-2 text-gray-600">Analyse des tendances et évolutions</p>
+            <h1 className="text-3xl font-bold text-gray-900">Recommandation</h1>
+            <p className="mt-2 text-gray-600">Analyse des recommandations et évolutions</p>
           </div>
         </div>
         

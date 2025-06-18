@@ -31,15 +31,15 @@ const navigation = [
     icon: BarChart3,
   },
   {
-    name: 'Tendances',
+    name: 'Recommandation',
     href: '/tendances',
     icon: TrendingUp,
   },
-  {
-    name: 'Sécurité',
-    href: '/securite',
-    icon: Shield,
-  },
+  // {
+  //   name: 'Sécurité',
+  //   href: '/securite',
+  //   icon: Shield,
+  // },
 ];
 
 export function Navbar() {
