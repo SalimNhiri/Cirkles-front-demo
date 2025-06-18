@@ -5,7 +5,7 @@ const metrics = [
   {
     title: 'Tendance Volume',
     value: '+15.3%',
-    description: 'vs mois dernier',
+    description: 'vs le mois dernier',
     icon: TrendingUp,
     color: 'text-green-500',
     bgColor: 'bg-green-50',
@@ -15,7 +15,7 @@ const metrics = [
   {
     title: 'Évolution Montants',
     value: '+8.2%',
-    description: 'vs année dernière',
+    description: 'vs le mois dernier',
     icon: TrendingUp,
     color: 'text-blue-500',
     bgColor: 'bg-blue-50',
@@ -25,7 +25,7 @@ const metrics = [
   {
     title: 'Coût de la Fraude',
     value: '2.4M€',
-    description: '+12% ce trimestre',
+    description: 'vs le mois dernier',
     icon: AlertTriangle,
     color: 'text-red-500',
     bgColor: 'bg-red-50',
