@@ -9,6 +9,10 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  LineChart,
+  Line,
+  Legend,
+  ReferenceArea,
 } from 'recharts';
 
 const volumeData = [
@@ -27,36 +31,76 @@ const volumeData = [
 ];
 
 export function VolumeTab() {
+  // Calcul de la progression depuis janvier
+  const clientStart = volumeData[0].clientIndex;
+  const clientEnd = volumeData[volumeData.length - 1].clientIndex;
+  const marketStart = volumeData[0].marketIndex;
+  const marketEnd = volumeData[volumeData.length - 1].marketIndex;
+  const clientProgressNum = ((clientEnd - clientStart) / clientStart) * 100;
+  const marketProgressNum = ((marketEnd - marketStart) / marketStart) * 100;
+  const clientProgress = clientProgressNum.toFixed(1);
+  const marketProgress = marketProgressNum.toFixed(1);
+  const conclusion = `Depuis janvier, l'indice client a progressé de ${clientProgressNum > 0 ? '+' : ''}${clientProgress}%, contre ${marketProgressNum > 0 ? '+' : ''}${marketProgress}% pour le marché.`;
+
+  // Création des segments pour l'air entre les deux courbes (ReferenceArea)
+  const referenceAreas = [];
+  for (let i = 0; i < volumeData.length - 1; i++) {
+    const d1 = volumeData[i];
+    const d2 = volumeData[i + 1];
+    referenceAreas.push({
+      x1: d1.month,
+      x2: d2.month,
+      y1: Math.min(d1.clientIndex, d1.marketIndex),
+      y2: Math.max(d1.clientIndex, d1.marketIndex),
+    });
+  }
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <div className="rounded-lg border bg-card p-6 shadow-sm">
         <h3 className="text-lg font-semibold mb-4">Évolution des indices (base 100 = Janvier)</h3>
         <div className="h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={volumeData}>
+            <LineChart data={volumeData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="month" />
-              <YAxis domain={[75, 110]} />
+              <YAxis domain={[Math.min(...volumeData.map(d => Math.min(d.clientIndex, d.marketIndex))) - 2, Math.max(...volumeData.map(d => Math.max(d.clientIndex, d.marketIndex))) + 2]} />
               <Tooltip />
-              <Area
+              {/* Air discret entre les deux courbes */}
+              {referenceAreas.map((area, idx) => (
+                <ReferenceArea
+                  key={idx}
+                  x1={area.x1}
+                  x2={area.x2}
+                  y1={area.y1}
+                  y2={area.y2}
+                  stroke={undefined}
+                  fill="#a5b4fc"
+                  fillOpacity={0.15}
+                />
+              ))}
+              {/* Lignes nettes */}
+              <Line
                 type="monotone"
                 dataKey="clientIndex"
                 stroke="#6366f1"
-                fill="#6366f1"
-                fillOpacity={0.2}
+                strokeWidth={2}
+                dot={false}
                 name="Indice client"
               />
-              <Area
+              <Line
                 type="monotone"
                 dataKey="marketIndex"
                 stroke="#8b5cf6"
-                fill="#8b5cf6"
-                fillOpacity={0.2}
+                strokeWidth={2}
+                dot={false}
                 name="Indice marché"
               />
-            </AreaChart>
+              <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '13px', color: '#64748b' }} />
+            </LineChart>
           </ResponsiveContainer>
         </div>
+        <div className="text-xs text-gray-500 mt-2 italic text-right">{conclusion}</div>
       </div>
 
       <div className="rounded-lg border bg-card p-6 shadow-sm">
@@ -80,6 +124,9 @@ export function VolumeTab() {
               />
             </BarChart>
           </ResponsiveContainer>
+        </div>
+        <div className="text-xs text-gray-500 mt-2 italic text-right">
+          Les variations mensuelles montrent une volatilité marquée, avec des pics et des baisses notables selon les périodes.
         </div>
       </div>
     </div>
