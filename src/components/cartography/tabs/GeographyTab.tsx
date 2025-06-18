@@ -1,6 +1,7 @@
 import React from 'react';
 import { GeographyTrendsChart } from '../graphs/GeographyTrendsChart';
 import { TopRegionsList } from '../graphs/TopRegionsList';
+import { FranceMapboxHeatmap } from '../graphs/FranceMapboxHeatmap';
 
 export function GeographyTab() {
   return (
@@ -9,6 +10,7 @@ export function GeographyTab() {
         <TopRegionsList />
         <GeographyTrendsChart />
       </div>
+      <FranceMapboxHeatmap />
     </div>
   );
 } 
