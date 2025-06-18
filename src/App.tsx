@@ -6,6 +6,7 @@ import { AnalysisPage } from './pages/AnalysisPage';
 import { AlertsPage } from './pages/AlertsPage';
 import { TrendsPage } from './pages/TrendsPage';
 import { SecurityPage } from './pages/SecurityPage';
+import { SettingsPage } from './pages/SettingsPage';
 
 export function App() {
   return (
@@ -17,6 +18,7 @@ export function App() {
         <Route path="/tendances" element={<TrendsPage />} />
         <Route path="/securite" element={<SecurityPage />} />
         <Route path="/alertes" element={<AlertsPage />} />
+        <Route path="/parametres" element={<SettingsPage />} />
         {/* Autres routes à ajouter plus tard */}
       </Routes>
     </Router>

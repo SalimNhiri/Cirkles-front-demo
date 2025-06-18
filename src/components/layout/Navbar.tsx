@@ -204,7 +204,8 @@ export function Navbar() {
                     </div>
                     {!isCollapsed && <span className="whitespace-nowrap">Alertes</span>}
                   </Link>
-                  <button 
+                  <Link
+                    to="/parametres"
                     className={`
                       flex items-center w-full px-2 py-2 text-sm font-medium text-gray-600 rounded-lg 
                       hover:bg-gray-50 hover:text-gray-900 transition-all group
@@ -213,7 +214,7 @@ export function Navbar() {
                   >
                     <Settings className={`w-5 h-5 ${isCollapsed ? '' : 'mr-2'} text-gray-400 group-hover:text-blue-600 transition-colors`} />
                     {!isCollapsed && <span className="whitespace-nowrap">Paramètres</span>}
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
