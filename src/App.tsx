@@ -7,6 +7,17 @@ import { AlertsPage } from './pages/AlertsPage';
 import { TrendsPage } from './pages/TrendsPage';
 import { SecurityPage } from './pages/SecurityPage';
 import { SettingsPage } from './pages/SettingsPage';
+import ROICostPage from './pages/ROICostPage';
+
+// Placeholder pour la page ROI & cout
+function RoiCoutPage() {
+  return (
+    <div style={{ padding: 40 }}>
+      <h1>ROI & coût</h1>
+      <p>Contenu à venir...</p>
+    </div>
+  );
+}
 
 export function App() {
   return (
@@ -19,6 +30,7 @@ export function App() {
         <Route path="/securite" element={<SecurityPage />} />
         <Route path="/alertes" element={<AlertsPage />} />
         <Route path="/parametres" element={<SettingsPage />} />
+        <Route path="/roi-cout" element={<ROICostPage />} />
         {/* Autres routes à ajouter plus tard */}
       </Routes>
     </Router>

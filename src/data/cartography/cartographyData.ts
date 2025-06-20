@@ -74,7 +74,56 @@ export const modusOperandiData: ModusOperandiData[] = [
   { name: 'Falsification de documents', value: 25, color: '#10B981' },
   { name: 'Blanchiment d\'argent', value: 20, color: '#F59E0B' },
   { name: 'Fraude au paiement', value: 15, color: '#EF4444' },
-  { name: 'Autres', value: 10, color: '#8B5CF6' },
+  { name: 'Collusion interne', value: 10, color: '#F472B6' },
+  { name: 'Autres', value: 5, color: '#8B5CF6' },
+];
+
+// Données d'évolution annuelle par modus operandi (2021-2024) - proportions (%) et benchmarks spécifiques
+export const modusOperandiYearlyData = [
+  {
+    year: 2021,
+    usurpation: 40,
+    fausseDeclaration: 30,
+    falsification: 20,
+    collusion: 10,
+    benchmarkUsurpation: 18,
+    benchmarkFausseDeclaration: 12,
+    benchmarkFalsification: 14,
+    benchmarkCollusion: 8,
+  },
+  {
+    year: 2022,
+    usurpation: 38,
+    fausseDeclaration: 28,
+    falsification: 22,
+    collusion: 12,
+    benchmarkUsurpation: 17,
+    benchmarkFausseDeclaration: 13,
+    benchmarkFalsification: 15,
+    benchmarkCollusion: 10,
+  },
+  {
+    year: 2023,
+    usurpation: 35,
+    fausseDeclaration: 25,
+    falsification: 25,
+    collusion: 15,
+    benchmarkUsurpation: 16,
+    benchmarkFausseDeclaration: 14,
+    benchmarkFalsification: 16,
+    benchmarkCollusion: 13,
+  },
+  {
+    year: 2024,
+    usurpation: 32,
+    fausseDeclaration: 22,
+    falsification: 26,
+    collusion: 20,
+    benchmarkUsurpation: 15,
+    benchmarkFausseDeclaration: 15,
+    benchmarkFalsification: 17,
+    benchmarkCollusion: 16,
+  },
 ];
 
 // Données d'actifs

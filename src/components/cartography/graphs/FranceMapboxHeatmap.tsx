@@ -127,26 +127,46 @@ export const FranceMapboxHeatmap = () => {
           <Source id="fraud" type="geojson" data={geojson}>
             <Layer {...heatmapLayer} />
           </Source>
-          {/* Marqueurs */}
+          {/* Marqueurs multiples pour chaque type de fraude */}
           {geographicData.map(region => {
             const coords = regionCoords[region.region];
             if (!coords) return null;
+            // Paramètres pour chaque type
+            const types = [
+              { key: 'averee', color: '#3B82F6', label: 'Avérée', value: region.averee },
+              { key: 'dejouee', color: '#10B981', label: 'Déjouée', value: region.dejouee },
+              { key: 'suspectee', color: '#F59E0B', label: 'Suspectée', value: region.suspectee },
+              { key: 'benchmark', color: '#A3A3A3', label: 'Benchmark', value: region.benchmark }
+            ];
             return (
-              <Marker
-                key={region.region}
-                longitude={Number(coords[0])}
-                latitude={Number(coords[1])}
-                anchor="center"
-              >
-                <div
-                  className={`w-6 h-6 rounded-full border-4 ${region.risk === 'Élevé' ? 'border-red-500 animate-pulse' : region.risk === 'Moyen' ? 'border-yellow-400' : 'border-green-500'} bg-white cursor-pointer shadow-lg`}
-                  title={region.region}
-                  onClick={() => setSelectedRegion(region)}
-                />
-              </Marker>
+              <React.Fragment key={region.region}>
+                {types.map((type, idx) => (
+                  <Marker
+                    key={type.key}
+                    longitude={Number(coords[0]) + idx * 0.05 - 0.075}
+                    latitude={Number(coords[1])}
+                    anchor="center"
+                  >
+                    <div
+                      className={`rounded-full border-2 shadow-lg cursor-pointer`}
+                      style={{
+                        width: 16 + Math.sqrt(type.value) * 1.5,
+                        height: 16 + Math.sqrt(type.value) * 1.5,
+                        background: type.color,
+                        opacity: type.key === 'benchmark' ? 0.5 : 0.85,
+                        borderColor: type.key === 'benchmark' ? '#A3A3A3' : type.color,
+                        marginLeft: idx * 8,
+                        zIndex: type.key === 'benchmark' ? 1 : 2
+                      }}
+                      title={`${region.region} - ${type.label}: ${type.value}`}
+                      onClick={() => setSelectedRegion(region)}
+                    />
+                  </Marker>
+                ))}
+              </React.Fragment>
             );
           })}
-          {/* Popup */}
+          {/* Popup enrichi */}
           {selectedRegion && regionCoords[selectedRegion.region] && (
             <Popup
               longitude={Number(regionCoords[selectedRegion.region][0])}
@@ -158,10 +178,12 @@ export const FranceMapboxHeatmap = () => {
             >
               <div className="text-sm">
                 <div className="font-bold text-gray-900">{selectedRegion.region}</div>
-                <div className="mt-1">Cas : <span className="font-semibold">{selectedRegion.cases}</span></div>
+                <div className="mt-1">Fraude avérée : <span className="font-semibold text-blue-600">{selectedRegion.averee}</span> <span className="text-xs">({selectedRegion.averee - selectedRegion.benchmark >= 0 ? '+' : ''}{selectedRegion.averee - selectedRegion.benchmark}) vs marché</span></div>
+                <div className="mt-1">Fraude déjouée : <span className="font-semibold text-green-600">{selectedRegion.dejouee}</span> <span className="text-xs">({selectedRegion.dejouee - selectedRegion.benchmark >= 0 ? '+' : ''}{selectedRegion.dejouee - selectedRegion.benchmark}) vs marché</span></div>
+                <div className="mt-1">Fraude suspectée : <span className="font-semibold text-yellow-600">{selectedRegion.suspectee}</span> <span className="text-xs">({selectedRegion.suspectee - selectedRegion.benchmark >= 0 ? '+' : ''}{selectedRegion.suspectee - selectedRegion.benchmark}) vs marché</span></div>
+                <div className="mt-1">Benchmark marché : <span className="font-semibold text-gray-600">{selectedRegion.benchmark}</span></div>
+                <div className="mt-2">Total cas : <span className="font-semibold">{selectedRegion.cases}</span></div>
                 <div className="mt-1">Risque : <span className="font-semibold" style={{ color: riskColors[selectedRegion.risk] }}>{selectedRegion.risk}</span></div>
-                <div className="mt-1">Tendance compagnie : <span className={selectedRegion.companyTrend >= 0 ? 'text-green-600' : 'text-red-600'}>{selectedRegion.companyTrend >= 0 ? '+' : ''}{selectedRegion.companyTrend}%</span></div>
-                <div className="mt-1">Tendance marché : <span className={selectedRegion.marketTrend >= 0 ? 'text-green-600' : 'text-red-600'}>{selectedRegion.marketTrend >= 0 ? '+' : ''}{selectedRegion.marketTrend}%</span></div>
               </div>
             </Popup>
           )}

@@ -35,6 +35,11 @@ const navigation = [
     href: '/tendances',
     icon: TrendingUp,
   },
+  {
+    name: 'ROI & cout',
+    href: '/roi-cout',
+    icon: BarChart3,
+  },
   // {
   //   name: 'Sécurité',
   //   href: '/securite',

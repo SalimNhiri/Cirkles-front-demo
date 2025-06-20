@@ -15,53 +15,76 @@ import {
 const trendsData = [
   {
     month: 'Jan',
-    total: 120,
-    detected: 95,
-    prevented: 25,
+    averee: 120,
+    dejouee: 30,
+    suspectee: 15,
+    benchmark: 140,
     detectionRate: 79,
     preventionRate: 21,
   },
   {
     month: 'Fév',
-    total: 135,
-    detected: 108,
-    prevented: 27,
+    averee: 135,
+    dejouee: 32,
+    suspectee: 18,
+    benchmark: 150,
     detectionRate: 80,
     preventionRate: 20,
   },
   {
     month: 'Mar',
-    total: 142,
-    detected: 115,
-    prevented: 27,
+    averee: 142,
+    dejouee: 35,
+    suspectee: 20,
+    benchmark: 160,
     detectionRate: 81,
     preventionRate: 19,
   },
   {
     month: 'Avr',
-    total: 156,
-    detected: 128,
-    prevented: 28,
+    averee: 156,
+    dejouee: 38,
+    suspectee: 22,
+    benchmark: 170,
     detectionRate: 82,
     preventionRate: 18,
   },
   {
     month: 'Mai',
-    total: 168,
-    detected: 140,
-    prevented: 28,
+    averee: 168,
+    dejouee: 40,
+    suspectee: 25,
+    benchmark: 180,
     detectionRate: 83,
     preventionRate: 17,
   },
   {
     month: 'Juin',
-    total: 175,
-    detected: 148,
-    prevented: 27,
+    averee: 175,
+    dejouee: 42,
+    suspectee: 28,
+    benchmark: 185,
     detectionRate: 85,
     preventionRate: 15,
   },
 ];
+
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
+    const found = trendsData.find(d => d.month === label);
+    return (
+      <div className="bg-white/95 p-4 rounded-xl shadow-lg border border-gray-100">
+        <p className="text-sm font-medium text-gray-900">{label}</p>
+        {payload.map((entry: any, index: number) => (
+          <p key={index} className="text-sm" style={{ color: entry.color }}>
+            {entry.name}: {entry.value} {entry.dataKey !== 'benchmark' && found ? `(${entry.value - found.benchmark >= 0 ? '+' : ''}${entry.value - found.benchmark} vs marché)` : ''}
+          </p>
+        ))}
+      </div>
+    );
+  }
+  return null;
+};
 
 export function TrendsTab() {
   return (
@@ -75,28 +98,37 @@ export function TrendsTab() {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="month" />
                 <YAxis />
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />} />
                 <Legend />
                 <Line
                   type="monotone"
-                  dataKey="total"
-                  name="Total des cas"
-                  stroke="#6366f1"
+                  dataKey="averee"
+                  name="Fraude avérée"
+                  stroke="#3B82F6"
                   strokeWidth={2}
                 />
                 <Line
                   type="monotone"
-                  dataKey="detected"
-                  name="Cas détectés"
-                  stroke="#8b5cf6"
+                  dataKey="dejouee"
+                  name="Fraude déjouée"
+                  stroke="#10B981"
                   strokeWidth={2}
                 />
                 <Line
                   type="monotone"
-                  dataKey="prevented"
-                  name="Cas prévenus"
-                  stroke="#ec4899"
+                  dataKey="suspectee"
+                  name="Fraude suspectée"
+                  stroke="#F59E0B"
                   strokeWidth={2}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="benchmark"
+                  name="Benchmark marché"
+                  stroke="#A3A3A3"
+                  strokeDasharray="5 5"
+                  strokeWidth={2}
+                  dot={false}
                 />
               </LineChart>
             </ResponsiveContainer>

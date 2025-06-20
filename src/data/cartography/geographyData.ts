@@ -6,6 +6,10 @@ export interface GeographicData {
   marketTrend: number;
   risk: 'Élevé' | 'Moyen' | 'Faible';
   color: string;
+  averee: number;
+  dejouee: number;
+  suspectee: number;
+  benchmark: number;
 }
 
 export const geographicData: GeographicData[] = [
@@ -16,7 +20,11 @@ export const geographicData: GeographicData[] = [
     companyTrend: 5,
     marketTrend: 3,
     risk: 'Élevé',
-    color: '#3B82F6'
+    color: '#3B82F6',
+    averee: 220,
+    dejouee: 120,
+    suspectee: 83,
+    benchmark: 350
   },
   {
     region: 'Auvergne-Rhône-Alpes',
@@ -25,7 +33,11 @@ export const geographicData: GeographicData[] = [
     companyTrend: 3,
     marketTrend: 4,
     risk: 'Moyen',
-    color: '#10B981'
+    color: '#10B981',
+    averee: 150,
+    dejouee: 90,
+    suspectee: 72,
+    benchmark: 280
   },
   {
     region: 'Hauts-de-France',
@@ -34,7 +46,11 @@ export const geographicData: GeographicData[] = [
     companyTrend: -2,
     marketTrend: -1,
     risk: 'Moyen',
-    color: '#F59E0B'
+    color: '#F59E0B',
+    averee: 110,
+    dejouee: 80,
+    suspectee: 55,
+    benchmark: 200
   },
   {
     region: 'Provence-Alpes-Côte d\'Azur',
@@ -43,7 +59,11 @@ export const geographicData: GeographicData[] = [
     companyTrend: 4,
     marketTrend: 2,
     risk: 'Élevé',
-    color: '#EF4444'
+    color: '#EF4444',
+    averee: 90,
+    dejouee: 60,
+    suspectee: 48,
+    benchmark: 160
   },
   {
     region: 'Occitanie',
@@ -52,7 +72,11 @@ export const geographicData: GeographicData[] = [
     companyTrend: -1,
     marketTrend: 1,
     risk: 'Faible',
-    color: '#8B5CF6'
+    color: '#8B5CF6',
+    averee: 70,
+    dejouee: 50,
+    suspectee: 36,
+    benchmark: 120
   },
   {
     region: 'Nouvelle-Aquitaine',
@@ -61,6 +85,10 @@ export const geographicData: GeographicData[] = [
     companyTrend: 2,
     marketTrend: 3,
     risk: 'Moyen',
-    color: '#EC4899'
+    color: '#EC4899',
+    averee: 60,
+    dejouee: 40,
+    suspectee: 34,
+    benchmark: 100
   }
 ]; 
